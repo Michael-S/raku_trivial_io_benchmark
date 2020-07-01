@@ -1,0 +1,62 @@
+Raku Trivial IO Benchmarks
+
+..just like the title says.  I saw a discussion board complaint
+that Raku was incredibly slow for file IO, and the person complaining
+stated that they used an early version of Perl6 and it took 20 minutes
+to read a 100MB file.
+
+I decided to experiment with a recent Raku release to see how it
+performed. The experiments were on Ubuntu MATE 20.04 on an AMD
+Ryzen 5 processor, with the 100MB (really, 100_000_000 byte) file
+on a traditional hard drive.
+
+To run these tests, you need Raku installed.  If you want to run the C
+tests for comparison you need GCC installed, or some other C compiler if
+you want to change the compilation command. You must also put a file
+named "junk.bytes" of length 100_000_000 bytes in the same directory
+or else modify the files to handle different lengths. 
+
+I also had the last ten bytes of each file print to ensure I was
+reading the same amount each time.
+
+To get a 100_000_000 file, you can take any file greater than 100_000_000
+bytes in length, like "something.mp4" and then do
+cat something.mp4 | head -c 100000000 > junk.bytes
+
+Raku, read one byte at a time:
+time raku read_single_byte.raku
+real	10m54.248s
+user	10m20.586s
+sys	0m33.337s
+
+Raku, reading in 64k chunks:
+time raku read_buffered.raku
+real	0m0.347s
+user	0m0.367s
+sys	0m0.080s
+
+Raku, reading the whole file at once:
+time raku read_slurp.raku
+real	0m0.380s
+user	0m0.332s
+sys	0m0.134s
+
+C, reading the file one byte at a time:
+gcc read_single_byte.c && time ./a.out
+real	0m1.016s
+user	0m0.988s
+sys	0m0.028s
+
+C, reading the file in 64k chunks:
+gcc read_buffered.c && time ./a.out
+real	0m0.018s
+user	0m0.004s
+sys	0m0.015s
+
+Capturing the Raku startup time:
+time raku -e "say 'Hello World'"
+real	0m0.235s
+user	0m0.246s
+sys	0m0.028s
+
+

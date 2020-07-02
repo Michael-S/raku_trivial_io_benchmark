@@ -23,6 +23,11 @@ To get a 100_000_000 file, you can take any file greater than 100_000_000
 bytes in length, like "something.mp4" and then do
 cat something.mp4 | head -c 100000000 > junk.bytes
 
+Raku version:
+raku --version
+This is Rakudo version 2020.06 built on MoarVM version 2020.06
+implementing Raku 6.d
+
 Raku, read one byte at a time:
 time raku read_single_byte.raku
 real	10m54.248s

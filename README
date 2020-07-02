@@ -64,4 +64,10 @@ real	0m0.235s
 user	0m0.246s
 sys	0m0.028s
 
-
+Addendum 2020-07-02:
+I have adjusted the Raku scripts to use an int instead of Int
+for a loop counter and to do bindings instead of Scalar assignments
+to cut memory allocations.  I tested it, and it has a marginal
+impact on performance.  I want better performance, but
+I am actually pleased overall, because a Raku novice shouldn't
+need to learn these tricks to get good performance.

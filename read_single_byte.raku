@@ -4,14 +4,15 @@
 # This version reads 1 byte at a time, and is painfully slow.
 
 my $fh = open "junk.bytes", :r, :bin;
-my $count = 0;
+my int $count = 0;
+my Buf $x;
 while $count < 99_999_990 {
-  my $x = $fh.read(1);
+  $x := $fh.read(1);
   $count++;
 }
-my @lastTen = [];
+my @lastTen := [];
 while @lastTen.elems < 10 {
-  my $x = $fh.read(1);
+  $x := $fh.read(1);
   if ($x.bytes == 0) {
     last;
   }

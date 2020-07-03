@@ -1,0 +1,9 @@
+GitHub offers many features and has become the default place people
+share and search for source code. But centralizing everything in
+one location is risky.
+
+I am making a practice of dual-hosting my projects.
+For this project:
+https://github.com/Michael-S/raku_trivial_io_benchmark
+and
+https://git.sr.ht/~mikeswierczek/raku_trivial_io_benchmark
